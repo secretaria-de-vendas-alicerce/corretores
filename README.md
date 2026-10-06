@@ -12,15 +12,21 @@ O convite da Agenda e o WhatsApp da secretaria mandavam a `/exec` crua do projet
 roteador `/u/N/` do Google — quem tem duas contas logadas abre na conta errada.
 
 Igual ao wrapper da Agenda, este **redireciona** (não embute): o A executa como quem acessa, e
-dentro de `<iframe>` o login do Google não acontece (F0, D3). A pessoa vai pelo seletor de conta, e
-o `?e=` do convite já escolhe a conta certa. Ninguém confia no `?e=`: a identidade continua sendo a
-conta Google que o app lê.
+dentro de `<iframe>` o login do Google não acontece (F0, D3). Com o `?e=` do convite, manda para a
+`/exec?authuser=<e-mail>`, que abre naquela conta; sem `?e=`, o seletor de conta do Google. Ninguém
+confia no `?e=`: a identidade continua sendo a conta Google que o app lê.
+
+**Não usar `AccountChooser?Email=…&continue=<exec>`** (era o desenho até 06/10): o script.google.com
+não herda a conta escolhida — cai em `/u/0` ou numa conta Workspace (`/a/<domínio>/…`, "Não foi
+possível abrir o arquivo").
 
 Ícones e favicon vêm do kit no Pages do Hub (`hub-alicerce/icones/corretores/`): nada para copiar aqui.
 
 ## Publicar (uma vez)
 
-Na pasta `wrapper/` deste app:
+**Publicado em 05/10/2026.** NÃO rode `--source=.` aqui dentro: `wrapper/` mora no repo cephalon, e o
+`--push` empurraria o cephalon inteiro (com CPFs) para um repo público. Copie os 3 arquivos para uma
+pasta fora do repo, `git init -b main` + commit, e rode de lá (conta `secretaria-de-vendas-alicerce`):
 
 ```bash
 gh repo create secretaria-de-vendas-alicerce/corretores --public --source=. --push
